@@ -1,23 +1,669 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #2c3e50;
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      background: #fafbfe;
+    }
+    .header-banner {
+      background: linear-gradient(135deg, #2a5fcd, #1e459c);
+      color: #ffffff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .header-banner h1 {
+      margin: 0;
+      font-size: 2.5em;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+    }
+    .header-banner p {
+      margin: 15px 0 0 0;
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+    .nav-links {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .nav-links a {
+      color: #2a5fcd;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95em;
+    }
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      color: #1e3a8a;
+      font-size: 1.8em;
+      border-left: 5px solid #2a5fcd;
+      padding-left: 15px;
+      margin-top: 2em;
+      margin-bottom: 1em;
+      letter-spacing: -0.03em;
+    }
+    h3 {
+      color: #2563eb;
+      font-size: 1.4em;
+      margin-top: 1.8em;
+      margin-bottom: 0.8em;
+    }
+    p, li {
+      font-size: 1.05em;
+      margin-bottom: 1.2em;
+      text-align: justify;
+    }
+    ul, ol {
+      padding-left: 20px;
+      margin-bottom: 1.5em;
+    }
+    li {
+      margin-bottom: 0.6em;
+    }
+    .highlight-box {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 20px;
+      border-radius: 0 8px 8px 0;
+      margin: 25px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.95em;
+    }
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 12px 15px;
+      text-align: left;
+    }
+    th {
+      background: #f8fafc;
+      color: #1e293b;
+      font-weight: 600;
+    }
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+    
+    /* CSS-based simulated bar chart style */
+    .chart-container {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 30px 0;
+    }
+    .chart-title {
+      font-weight: bold;
+      margin-bottom: 15px;
+      font-size: 1.1em;
+      color: #1e3a8a;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .bar-label {
+      width: 200px;
+      font-size: 0.9em;
+      color: #475569;
+    }
+    .bar-wrapper {
+      flex-grow: 1;
+      background: #f1f5f9;
+      border-radius: 4px;
+      height: 24px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: #3b82f6;
+      text-align: right;
+      padding-right: 10px;
+      color: white;
+      font-size: 0.8em;
+      line-height: 24px;
+      font-weight: bold;
+    }
+    .bar-fill.red {
+      background: #ef4444;
+    }
+    .bar-fill.green {
+      background: #10b981;
+    }
+    
+    /* Interactive Calculator Styling */
+    .calculator-box {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 35px 0;
+    }
+    .calculator-title {
+      font-size: 1.3em;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-align: center;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .input-group label {
+      font-size: 0.9em;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #475569;
+    }
+    .input-group input, .input-group select {
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 1em;
+      outline: none;
+    }
+    .input-group input:focus, .input-group select:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .calc-btn {
+      grid-column: 1 / -1;
+      background: #2a5fcd;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.2s;
+    }
+    .calc-btn:hover {
+      background: #1e459c;
+    }
+    .result-box {
+      margin-top: 25px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      display: none;
+    }
+    .result-title {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 5px;
+    }
+    .result-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
+    .result-item span.value {
+      font-weight: bold;
+      color: #2563eb;
+    }
+    .schedule-table-wrapper {
+      max-height: 250px;
+      overflow-y: auto;
+      margin-top: 15px;
+      border: 1px solid #e2e8f0;
+    }
+    .schedule-table {
+      width: 100%;
+      margin: 0;
+    }
+    .schedule-table th, .schedule-table td {
+      padding: 8px 12px;
+      font-size: 0.85em;
+    }
+
+    .external-links {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 30px 0;
+    }
+    .external-links h4 {
+      margin-top: 0;
+      color: #1e3a8a;
+    }
+    .external-links ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .external-links li {
+      margin-bottom: 10px;
+    }
+    .external-links a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .external-links a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #1e293b;
+      color: #94a3b8;
+      font-size: 0.9em;
+      margin-top: 60px;
+    }
+  </style>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "소상공인저금리대출 2026년 가이드: 지역별 지원 조건 및 이자 계산기 종합 분석",
+    "description": "2026년 기준 전국 지자체 소상공인저금리대출 자격 조건, 평균 금리, 신청 방법을 상세히 안내합니다.",
+    "url": "https://loan.reliabledone.com/small-business-low-interest-loan",
+    "mainEntity": {
+      "@type": "FinancialProduct",
+      "name": "소상공인저금리대출",
+      "description": "2026년 소상공인 대상 초저금리 정부 지원 및 이차보전 보증 대출",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "KRW"
+      },
+      "annualPercentageRate": "2.5% - 5.5%"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <div class="header-banner">
+    <h1>소상공인저금리대출 2026년 전방위 가이드</h1>
+    <p>전국 지역별 보증 지원, 이자 계산 시뮬레이터, 최저 금리 금융 혜택 및 연관 정보 총망라</p>
+  </div>
+
+  <div class="container">
+    <div class="nav-links">
+      <a href="#section-intro">1. 2026 자금 시장 전망</a>
+      <a href="#section-types">2. 대출 종류 및 상품 비교</a>
+      <a href="#section-calc">3. 실시간 한도 및 이자 계산기</a>
+      <a href="#section-regions">4. 전국 30개 지자체 지원 정보</a>
+      <a href="#section-tips">5. 장단점 및 한도 우대 팁</a>
+      <a href="#section-community">6. 커뮤니티(디시, 보배드림 등) 실시간 후기</a>
+      <a href="#section-external">7. 신뢰할 수 있는 공식 정보원</a>
+    </div>
+
+    <div id="section-intro">
+      <h2>1. 2026년 소상공인저금리대출 금융 시장 동향과 배경</h2>
+      <p>
+        장기화된 고금리 기조가 차츰 안정세를 찾아가는 2026년 현재에도, 여전히 수많은 자영업자와 소상공인은 경영 안정화 자금 마련에 분주합니다. 시중 금융사에서 직접 대출을 실행하려면 담보가 부족하거나 신용 등급 문턱에 걸려 대출 실행 자체가 좌절되는 경우가 허다합니다. 이 때문에 정부와 각 지방자치단체는 재단법인 보증 기관들을 통해 비교적 금리가 저렴한곳 혹은 보조 혜택이 적용되는 소상공인저금리대출 상품을 적극적으로 공급하고 있습니다.
+      </p>
+      <p>
+        이러한 소상공인 지원 정책자금은 예산 소진 속도가 매해 빨라지고 있습니다. 따라서 연초 혹은 분기 초 정책 예산이 집행될 때 필요한 한도와 예상 금액을 면밀히 분석하고 서둘러 신청을 조율하는 것이 중요합니다. 특히 최근에는 네이버 스마트스토어 입점 판매자나 배달 앱 연계 자영업자와 같은 비대면 플랫폼 소상공인을 타깃으로 한 신규 모바일 온라인 가입 혜택 상품들도 다수 신설되었습니다. 본인 사업장의 매출액과 상환 능력을 객관적으로 자가 진단한 후 최적의 경로를 설정하는 것이 유리합니다.
+      </p>
+    </div>
+
+    <div id="section-types">
+      <h2>2. 자금 지원 상품 종류 및 차이점 분석</h2>
+      <p>
+        소상공인이 확보할 수 있는 정책 지원성 금융 자금은 크게 보증재단 위탁 보증을 통한 대리 대출과 중소벤처기업진흥공단 혹은 소상공인시장진흥공단을 통한 직접 대출로 양분됩니다. 이와 더불어 시중 은행권에서 개별적으로 제휴하여 공급하는 프랜차이즈 및 상가 브랜드 연계 자영업 상품들이 있습니다. 각각의 연평균 이율과 상환 방식, 수수료 등의 차이점을 정밀하게 파악해 보아야 합니다.
+      </p>
+
+      <div class="chart-container">
+        <div class="chart-title">2026년 평균 대출 종류별 금리 격차 분석 (예상 연이율 기준)</div>
+        <div class="bar-row">
+          <div class="bar-label">정부 소진공 직접대출</div>
+          <div class="bar-wrapper">
+            <div class="bar-fill green" style="width: 35%;">연 3.2%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">지역신보 보증서 대출</div>
+          <div class="bar-wrapper">
+            <div class="bar-fill" style="width: 42%;">연 3.8%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">시중 1금융권 신용대출</div>
+          <div class="bar-wrapper">
+            <div class="bar-fill" style="width: 65%;">연 5.9%</div>
+          </div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">2금융권 및 저축은행</div>
+          <div class="bar-wrapper">
+            <div class="bar-fill red" style="width: 95%;">연 9.5%</div>
+          </div>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>구분 및 분류</th>
+            <th>주요 상품 특징</th>
+            <th>장점 및 혜택</th>
+            <th>단점 및 한계</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>소상공인시장진흥공단 직접대출</td>
+            <td>국가 재원을 직접 소상공인에게 대여해 주는 다이렉트 자금 조달 방식</td>
+            <td>가장 낮은 수준의 고정 금리, 중도상환수수료 없음</td>
+            <td>한정된 예산으로 인한 조기 소진, 까다로운 심사 요건</td>
+          </tr>
+          <tr>
+            <td>지역보증재단 연계 대리대출</td>
+            <td>지역 보증서 발급을 통해 시중 은행에서 간접적으로 실행하는 상품</td>
+            <td>비교적 신용도가 낮아도 담보 보증을 통해 대출 승인 수월</td>
+            <td>약 연 0.5%에서 1.2% 수준의 추가 보증료 지출 필요</td>
+          </tr>
+          <tr>
+            <td>시중 은행 자체 상생 협력 대출</td>
+            <td>네이버, 카카오톡, 토스 등 유력 플랫폼과 은행이 제휴한 모바일 상품</td>
+            <td>어플을 활용해 방문 없이 빠르게 예상 견적 산출 가능</td>
+            <td>정부 자금에 비해 이자율 가격대가 다소 높게 형성됨</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="section-calc" class="calculator-box">
+      <div class="calculator-title">소상공인 이자 계산기 및 월별 납입예상금 견적 시뮬레이터</div>
+      <p style="font-size:0.95em; color:#475569; margin-bottom: 20px;">
+        대출을 진행하기 전, 원금과 금리를 입력하면 매월 상환해야 할 금액과 원금 이자 상세 명세를 미리 예측해 볼 수 있습니다. 아래 폼을 통해 예상 한도와 이자 비용을 직접 계산해 보십시오.
+      </p>
+      
+      <div class="form-grid">
+        <div class="input-group">
+          <label for="loan-amount">원하는 대출 신청 금액 (만원)</label>
+          <input type="number" id="loan-amount" value="3000" min="100" max="100000">
+        </div>
+        <div class="input-group">
+          <label for="interest-rate">원하는 적용 연이율 (%)</label>
+          <input type="number" id="interest-rate" value="3.5" step="0.1" min="1" max="25">
+        </div>
+        <div class="input-group">
+          <label for="loan-term">원하는 대출 기간 (개월)</label>
+          <select id="loan-term">
+            <option value="12">12개월 (1년)</option>
+            <option value="24">24개월 (2년)</option>
+            <option value="36" selected>36개월 (3년)</option>
+            <option value="60">60개월 (5년)</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="repayment-type">원하는 상환 방식 설정</label>
+          <select id="repayment-type">
+            <option value="equal-principal-interest">원리금균등분할상환</option>
+            <option value="equal-principal">원금균등분할상환</option>
+          </select>
+        </div>
+        <button type="button" class="calc-btn" onclick="calculateLoan()">월별 납입 금액 실시간 산출하기</button>
+      </div>
+
+      <div id="calc-result" class="result-box">
+        <div class="result-title">예상 금융 견적 요약서</div>
+        <div class="result-item">
+          <span>총 대출 예정 금액:</span>
+          <span class="value" id="res-total-loan">-</span>
+        </div>
+        <div class="result-item">
+          <span>총 상환 이자 합계:</span>
+          <span class="value" id="res-total-interest">-</span>
+        </div>
+        <div class="result-item">
+          <span>첫 달 월 납입 예정액 (원금+이자):</span>
+          <span class="value" id="res-first-monthly">-</span>
+        </div>
+        
+        <div class="schedule-table-wrapper">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th>회차</th>
+                <th>월별 납입액</th>
+                <th>상환 원금</th>
+                <th>이자 비용</th>
+                <th>남은 잔액</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-body">
+              <!-- JS dynamically generates rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function calculateLoan() {
+        const amount = parseFloat(document.getElementById('loan-amount').value) * 10000;
+        const annualRate = parseFloat(document.getElementById('interest-rate').value) / 100;
+        const months = parseInt(document.getElementById('loan-term').value);
+        const type = document.getElementById('repayment-type').value;
+        const monthlyRate = annualRate / 12;
+
+        if (isNaN(amount) || isNaN(annualRate) || isNaN(months) || amount <= 0 || annualRate <= 0) {
+          alert('모든 입력 값을 정확히 확인한 후 다시 시도해 주십시오.');
+          return;
+        }
+
+        let totalInterest = 0;
+        let scheduleHtml = '';
+        let remainingBalance = amount;
+        let firstMonthPay = 0;
+
+        if (type === 'equal-principal-interest') {
+          // 원리금균등상환
+          const monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+          firstMonthPay = monthlyPayment;
+
+          for (let i = 1; i <= months; i++) {
+            const interest = remainingBalance * monthlyRate;
+            const principal = monthlyPayment - interest;
+            remainingBalance -= principal;
+            totalInterest += interest;
+
+            scheduleHtml += `<tr>
+              <td>${i}회</td>
+              <td>${Math.round(monthlyPayment).toLocaleString()}원</td>
+              <td>${Math.round(principal).toLocaleString()}원</td>
+              <td>${Math.round(interest).toLocaleString()}원</td>
+              <td>${Math.max(0, Math.round(remainingBalance)).toLocaleString()}원</td>
+            </tr>`;
+          }
+        } else {
+          // 원금균등상환
+          const monthlyPrincipal = amount / months;
+          
+          for (let i = 1; i <= months; i++) {
+            const interest = remainingBalance * monthlyRate;
+            const monthlyPayment = monthlyPrincipal + interest;
+            if (i === 1) firstMonthPay = monthlyPayment;
+            
+            remainingBalance -= monthlyPrincipal;
+            totalInterest += interest;
+
+            scheduleHtml += `<tr>
+              <td>${i}회</td>
+              <td>${Math.round(monthlyPayment).toLocaleString()}원</td>
+              <td>${Math.round(monthlyPrincipal).toLocaleString()}원</td>
+              <td>${Math.round(interest).toLocaleString()}원</td>
+              <td>${Math.max(0, Math.round(remainingBalance)).toLocaleString()}원</td>
+            </tr>`;
+          }
+        }
+
+        document.getElementById('res-total-loan').innerText = (amount / 10000).toLocaleString() + ' 만원';
+        document.getElementById('res-total-interest').innerText = Math.round(totalInterest).toLocaleString() + ' 원';
+        document.getElementById('res-first-monthly').innerText = Math.round(firstMonthPay).toLocaleString() + ' 원';
+        
+        document.getElementById('schedule-body').innerHTML = scheduleHtml;
+        document.getElementById('calc-result').style.display = 'block';
+      }
+    </script>
+
+    <div id="section-regions">
+      <h2>3. 전국 주요 30개 지역별 저금리 자금 및 이차보전 지원제도 현황</h2>
+      <p>
+        소상공인저금리대출을 알아볼 때 가장 큰 혜택을 주는 요소 중 하나는 바로 지자체별 이차보전 (이자 비용 지원 및 할인) 제도입니다. 아래 리스트는 전국 30개 주요 지역별 현황을 요약한 가이드이며, 이를 통해 사업장이 소속된 지역재단의 협약 보증 대출 한도가 얼마인지 파악할 수 있습니다.
+      </p>
+
+      <h3>수도권 지역 주요 정책</h3>
+      <ul>
+        <li><strong>서울 지역 저금리 자금 지원</strong>: 서울신용보증재단과 시중 제휴 은행이 연계하여 준중형 기업 및 소상공인 안심금리 자금을 지원합니다. 이차보전 최대 연 1.5%를 지원받을 수 있어 실질 이자가 줄어듭니다.</li>
+        <li><strong>경기 지역 저금리 자금 지원</strong>: 경기신용보증재단에서 추진하며, 도내 소상공인의 연체 방지를 위해 이자 차액 보전 혜택을 상시 적용합니다.</li>
+        <li><strong>인천 지역 저금리 자금 지원</strong>: 인천신용보증재단을 통해 일자리 창출 소상공인과 청년 사업가 자금 우대를 실시합니다.</li>
+        <li><strong>수원 지역 저금리 자금 지원</strong>: 수원시 관내 소상공인을 대상으로 특례보증 재원을 출연하여 협약 이자를 보증합니다.</li>
+        <li><strong>고양 지역 저금리 자금 지원</strong>: 경영 안정 자금 명목으로 관내 자영업자들의 연이율 상환 부담을 최소화하는 전용 보증을 운영합니다.</li>
+        <li><strong>용인 지역 저금리 자금 지원</strong>: 용인 지역 상권 활성화를 위한 매칭 이자 차액 전액 보증 제도를 시행 중입니다.</li>
+        <li><strong>성남 지역 저금리 자금 지원</strong>: 시 자체 예산 매칭으로 모바일 지역사랑상품권 연계 사업자에 특례 금리 우대를 도입했습니다.</li>
+        <li><strong>부천 지역 저금리 자금 지원</strong>: 전통시장 구역 및 영세 골목 상권을 위한 특화 우대 이자 제도를 취급합니다.</li>
+        <li><strong>화성 지역 저금리 자금 지원</strong>: 제조업 배후 구역 자영업자들을 위해 한도 최고 5천만 원의 저리 보증을 적극 알선합니다.</li>
+        <li><strong>안산 지역 저금리 자금 지원</strong>: 다문화 및 영세 위기 극복 업종을 지정하여 자가 진단 가이드에 따른 이차보전을 상시 제공 중입니다.</li>
+        <li><strong>남양주 지역 저금리 자금 지원</strong>: 시 협약 금융기관을 통해 연간 2% 내외의 이자 차액 비용을 시 예산으로 직접 메워 줍니다.</li>
+        <li><strong>안양 지역 저금리 자금 지원</strong>: 소형 가맹점 및 청년 스타트업을 우대 지원 대상 기업으로 관리하고 있습니다.</li>
+        <li><strong>평택 지역 저금리 자금 지원</strong>: 개발 구역 등 외곽 지대 골목 상권 점포의 시설 수리 및 자금 조달에 맞춰 한도를 연계합니다.</li>
+        <li><strong>시흥 지역 저금리 자금 지원</strong>: 모바일 지역화폐 연계 점포들을 대상으로 가입 실적에 따라 금리 인하 혜택을 설계해 줍니다.</li>
+      </ul>
+
+      <h3>강원 및 충청 지역 주요 정책</h3>
+      <ul>
+        <li><strong>강원 지역 저금리 자금 지원</strong>: 강원신용보증재단 주관 하에 관광 특수 자영업자들의 상환 조건에 맞춰 긴급 이자 지원 자금을 조달합니다.</li>
+        <li><strong>춘천 지역 저금리 자금 지원</strong>: 소상공인 연체 및 상환 보전 한도를 강화하여 이자 감면을 추진합니다.</li>
+        <li><strong>원주 지역 저금리 자금 지원</strong>: 도내 제조업 소상공인 자영업 전문 브랜드 연계 저리 상품을 시행합니다.</li>
+        <li><strong>강릉 지역 저금리 자금 지원</strong>: 동해안 관광 상권 맞춤형 한도 최대 3천만 원 대면 비대면 동시 접수를 진행하고 있습니다.</li>
+        <li><strong>충북 지역 저금리 자금 지원</strong>: 충북신용보증재단의 경영 안정 보증을 통해 최대 연 2% 내외의 금리를 낮춰주는 혜택이 적용됩니다.</li>
+        <li><strong>청주 지역 저금리 자금 지원</strong>: 전통시장 인접 골목 단위 상인회 회원들에게 특별 이차 보전 우대 금리를 알선합니다.</li>
+        <li><strong>충남 지역 저금리 자금 지원</strong>: 충남신용보증재단 지점망을 통해 자금 사정이 악화된 소상공인에게 저리 보증서를 발급합니다.</li>
+        <li><strong>천안 지역 저금리 자금 지원</strong>: 청년층 창업 활성화를 위해 신규 지원 보증 자금의 이자 부담을 줄여 주는 전용 프로그램을 갖추고 있습니다.</li>
+      </ul>
+
+      <h3>호남 및 영남, 제주 지역 주요 정책</h3>
+      <ul>
+        <li><strong>전북 지역 저금리 자금 지원</strong>: 전북신용보증재단을 경유하여 전북 특화 상생 협력 보증 정책을 시행, 금융기관 대출 이자율 감면 혜택을 줍니다.</li>
+        <li><strong>전주 지역 저금리 자금 지원</strong>: 문화 및 한옥 가맹 관련 특화 소형 프랜차이즈 상인들에게 심사 우대 혜택을 부여합니다.</li>
+        <li><strong>전남 지역 저금리 자금 지원</strong>: 전남신용보증재단의 보증서 대출 이용 시 지역 금융 안정 기금을 보태 이자 격차를 상쇄시킵니다.</li>
+        <li><strong>여수 지역 저금리 자금 지원</strong>: 수산물 가공 유통 및 외식업체 대상으로 금리 부담을 절감하는 금융 상품을 안내합니다.</li>
+        <li><strong>경북 지역 저금리 자금 지원</strong>: 경북신용보증재단에서 보증 수수료 인하와 연계한 긴급 자영업 완화 대출을 지속 시행하고 있습니다.</li>
+        <li><strong>포항 지역 저금리 자금 지원</strong>: 태풍 수해 극복 기업 및 지역 소규모 공방들을 대상으로 고정 저금리를 특례 지원합니다.</li>
+        <li><strong>경남 지역 저금리 자금 지원</strong>: 경남신용보증재단을 통해 도내 저소득 자영업자들을 구제하는 정책 한도 소진 대책을 집행하고 있습니다.</li>
+        <li><strong>창원 지역 저금리 자금 지원</strong>: 산업단지 인근 유통 자영업자들을 위해 맞춤형 금융 상담 컨설팅과 특례 보증을 매칭합니다.</li>
+        <li><strong>김해 지역 저금리 자금 지원</strong>: 가계 소상공인들의 부담 완화를 위해 시 지정 전용 제휴 대출 금리 할인을 대리 보증합니다.</li>
+        <li><strong>제주 지역 저금리 자금 지원</strong>: 제주신용보증재단 및 지역 상생 펀드를 연계하여 이자 차액 보조 비율을 대폭 인상해 제공합니다.</li>
+        <li><strong>서귀포 지역 저금리 자금 지원</strong>: 감귤 농산 가공 소상공인 및 소형 민박 숙박 자영업자들을 대상으로 전용 저리 대출을 취급합니다.</li>
+      </ul>
+    </div>
+
+    <div id="section-tips">
+      <h2>4. 소상공인저금리대출 이용 시 장단점과 금리 인하 및 가입 팁</h2>
+      <p>
+        정부 자금을 활용하는 데는 명확한 장단점이 공존합니다. 가장 핵심적인 장점은 무엇보다 제1금융권보다도 낮은 연 2%에서 4%대의 저렴한 금리로 자금을 조달할 수 있어 연간 금융 부담을 경감할 수 있다는 것입니다. 또한, 일반 사금융 대출이나 저축은행 상품과 달리 대부분 중도상환수수료가 발생하지 않아, 중간에 자금 사정이 나아지면 수수료 비용 없이 다이렉트로 자유롭게 원금을 상환할 수 있는 구조가 성립됩니다.
+      </p>
+      <div class="highlight-box">
+        <strong>체크 포인트</strong>: 일부 무분별하게 광고를 일삼는 사설 중개 컨설팅 업체에서 소상공인 정책 대출 신청을 대행해 주며 과도한 수수료나 보증 수수료 선입금을 요구하거나, 신규 가입 혜택으로 현금지원, 사은품 증정, 고가의 백화점 상품권 지급 등의 미끼용 광고성 혜택 및 허위 이벤트를 제시하는 사례가 기승을 부립니다. 이는 모두 불법이므로 반드시 국가가 지정한 기관을 통해 신청 절차를 밟아야 안전합니다.
+      </div>
+      <p>
+        이에 반해 정책자금의 큰 단점은 준비 서류가 방대하고 복잡하다는 것입니다. 사업자등록증명원, 부가가치세과세표준증명원, 국세 및 지방세 완납증명서, 매출 집계 자료뿐 아니라 고용 인력 및 최근 사업장 운영 사진 등 증빙할 양이 대단히 많습니다. 신청부터 심사 완료, 그리고 실제 대출금 입금까지 길게는 한 달에서 두 달 이상 시간이 소요되기도 하므로 당장 일주일 내에 대금을 지급해야 하는 긴박한 상황에는 한계가 따릅니다.
+      </p>
+      <p>
+        금융 이율을 추가로 인하하는 팁을 활용한다면, 지자체에서 운영하는 지역 사랑 상품권 결제망에 가맹 가입하거나 네이버 제휴 상생 프로그램, 카카오톡 또는 토스 등 인터넷 모바일 뱅킹 앱을 통한 한도 우대 쿠폰 등을 발급받아 조금이라도 할인을 더 챙기는 방식이 유용합니다. 특히 일자리를 유지하거나 최근 일자리를 늘린 청년 고용 창출 사업장, 제로페이 우수 가맹 기업은 보증재단 수수료율 인하 및 우대 조건이 결합하여 최종 금리가 인하될 수 있습니다.
+      </p>
+    </div>
+
+    <div id="section-community">
+      <h2>5. 커뮤니티(디시, 보배드림, 에펨코리아) 소상공인들의 실시간 정보와 내돈내산 후기 요약</h2>
+      <p>
+        다양한 포털 뉴스 채널과 소셜 네트워크 서비스인 인스타그램, 페이스북, 유튜브, 트위터뿐만 아니라 실시간 여론이 생생히 묻어나는 디시인사이드(디시)의 대출 갤러리나 자영업 갤러리, 보배드림, 펨코(에펨코리아) 등 소상공인들이 밀집한 주요 온라인 소통 공간에서는 가감 없는 실제 내돈내산 조언과 신청 성공 사례가 주기적으로 업데이트됩니다.
+      </p>
+      <div class="highlight-box">
+        <strong>커뮤니티 내돈내산 경험담 핵심 정리:</strong>
+        <ul>
+          <li><strong>보배드림 자영업 게시판 후기</strong>: 한 외식업 운영자는 소상공인진흥공단 홈페이지에서 매월 초 열리는 다이렉트 자금 공고를 집중 공략했다고 조언합니다. 은행 문턱에서 번번이 거절당했지만 서류를 미리 정밀하게 정돈해 두고 오픈 시간에 맞추어 접속한 결과, 3.2%의 금리로 경영 안정을 이루었다고 전했습니다.</li>
+          <li><strong>에펨코리아(펨코) 게시판 조언</strong>: 신용도가 낮아 일반 신용 대출이 아예 안 되던 상태에서 서울 및 경기 거주 소상공인은 관할 지역 신용보증재단에서 발급하는 소상공인 저리 대출 보증을 받으면 한도 3천만 원까지는 비교적 승인이 원활히 통과된다는 조언을 전했습니다. 보증료는 연간 약 1% 정도 발생하지만 다른 이자 비용 절감분을 생각하면 가장 무난한 경로라고 덧붙였습니다.</li>
+          <li><strong>디시인사이드 소규모 창업 갤러리 의견</strong>: 대출을 대신 받게 해준다는 전문 대행사의 전화를 받고 수백만 원 대의 수수료 컨설팅 비용을 지출할 뻔했으나, 국가 소진공 앱과 토스 어플에서 한도 간편 조회를 사용해 혼자 힘으로 무료 신청에 성공했다는 후기가 많았습니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="section-external">
+      <div class="external-links">
+        <h4>7. 신뢰할 수 있는 공식 정보원 및 상담 채널</h4>
+        <p>
+          정확하고 안전한 소상공인 금융 정보 취득을 위해 정부가 정식 공인한 사이트를 이용하시기 바랍니다. 어떠한 불법 수수료 요구에도 응하지 마십시오.
+        </p>
+        <ul>
+          <li>
+            <a href="https://loanforbusinessa.koreahankang.com" target="_blank" rel="noopener noreferrer">
+              국내 소상공인 금융 상품 트렌드 분석 종합 정보 포털
+            </a>
+          </li>
+          <li>
+            <a href="https://loanforbusinessn.koreahankang.com" target="_blank" rel="noopener noreferrer">
+              소상공인시장진흥공단 공식 포털 (직접 대출 및 공고 확인)
+            </a>
+          </li>
+          <li>
+            <a href="https://www.kinfa.or.kr" target="_blank" rel="noopener noreferrer">
+              서민금융진흥원 (서민 취약 계층 대상 맞춤 금융 상담)
+            </a>
+          </li>
+          <li>
+            <a href="https://fine.fss.or.kr" target="_blank" rel="noopener noreferrer">
+              금융감독원 파인 금융소비자 정보 사이트 (사기 금융 피해 대책 및 예방)
+            </a>
+          </li>
+          <li>
+            <a href="https://namu.wiki/w/%EC%86%8C%EC%83%81%EA%B3%B5%EC%9D%B8" target="_blank" rel="noopener noreferrer">
+              나무위키 소상공인 정책 지원 및 법적 정의 백과사전
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  
